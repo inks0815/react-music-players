@@ -1,0 +1,30 @@
+export const MUSIC_LIST =[
+  {
+    id:1,
+    title:'大约在冬季',
+    artist:'齐秦',
+    file:'http://up.mcyt.net/md5/53/MjI2MDQz_Qq4329912.mp3',
+    cover:'http://oeff2vktt.bkt.clouddn.com/image/71.jpg'
+  },
+  {
+    id:2,
+    title:'Last Christmas',
+    artist:'Wham',
+    file:'http://up.mcyt.net/md5/53/NjY3MTk=_Qq4329912.mp3',
+    cover:'http://oeff2vktt.bkt.clouddn.com/image/84.jpg'
+  },
+  {
+    id:3,
+    title:'用心良苦',
+    artist:'张宇',
+    file:'http://up.mcyt.net/md5/53/NDA4MDQ3_Qq4329912.mp3',
+    cover:'http://oeff2vktt.bkt.clouddn.com/image/15.jpg'
+  },
+  {
+    id:4,
+    title:'女人花',
+    artist:'梅艳芳',
+    file:'http://up.mcyt.net/md5/53/MzI1Nzk5_Qq4329912.mp3',
+    cover:'http://oeff2vktt.bkt.clouddn.com/image/95.jpg'
+  }
+]

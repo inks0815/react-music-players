@@ -1,12 +1,14 @@
 import React from 'react';
 
 import Header from '../components/header';
-import ProgressN from '../components/progress';
+import Player from '../components/page/player';
+import {MUSIC_LIST} from '../config/musiclist'
+
 
 let IndexPage=React.createClass({
   getInitialState(){
      return{
-       progress:0
+          currentMusicItem:MUSIC_LIST[0]
      }
   },
  componentDidMount(){
@@ -17,21 +19,19 @@ let IndexPage=React.createClass({
         supplied:'mp3',
         wmode:'window'
    });
-    $('#player').bind($.jPlayer.event.timeupdate,(e)=>{
-      this.setState({
-        progress:Math.round(e.jPlayer.status.currentPercentAbsolute)
-      });
-    });
+
  },
 
  componentWillUnMount(){
-   $('#jPlayer').unbind($.jPlayer.event.timeupdate)
+
  },
+
+
   render(){
       return (
         <div>
           <Header></Header>
-          <ProgressN progress={this.state.progress}></ProgressN>
+          <Player currentMusicItem={this.state.currentMusicItem}></Player>
 
         </div>
       );
