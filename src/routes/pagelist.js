@@ -6,11 +6,11 @@ import MusicList from '../components/page/musiclist';
 import {MUSIC_LIST} from '../config/musiclist'
 
 
-let IndexPage=React.createClass({
+let PageList=React.createClass({
   getInitialState(){
      return{
-          musicList:MUSIC_LIST,
-          currentMusicItem:MUSIC_LIST[0]
+          musicList1:MUSIC_LIST,
+          currentMusicItem1:MUSIC_LIST[0]
      }
   },
  componentDidMount(){
@@ -34,11 +34,10 @@ let IndexPage=React.createClass({
       return (
 
         <div>
-
-          <Player currentMusicItem={this.state.currentMusicItem}></Player>
+          <MusicList currentMusicItem={this.state.currentMusicItem1} musicList={this.state.musicList1}></MusicList>
 
         {/*  {React.cloneElement(this.props.children,this.state)}
-            <MusicList currentMusicItem={this.state.currentMusicItem} musicList={this.state.musicList}></MusicList>
+               <Player currentMusicItem={this.state.currentMusicItem}></Player>
           */}
 
         </div>
@@ -46,4 +45,4 @@ let IndexPage=React.createClass({
     }
 }) ;
 
-export default IndexPage;
+export default PageList;

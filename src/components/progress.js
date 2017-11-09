@@ -6,13 +6,14 @@ class ProgressN extends React.Component{
 
   state = {
     inputValue: 0,
+
   }
  componentWillReceiveProps(){
    this.setState({
      inputValue: this.props.progress,
    });
    //console.log(this.props.progress);
- }
+}
 
   onChange = (value) => {
    this.setState({
@@ -32,7 +33,7 @@ class ProgressN extends React.Component{
             <Col span={1}>
 
             </Col>
-          
+
           </Row>
          {/*<Progress percent={this.props.progress} status="active" style={{cursor:'pointer'}}/>*/}
        </div>
