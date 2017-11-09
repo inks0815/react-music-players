@@ -9,6 +9,7 @@ import ProgressN from '../progress'
 import { Row, Col, Slider,Icon } from 'antd';
 import styles from './player.less';
 import {  Link } from 'dva/router';
+import Pubsub from 'pubsub-js'
 
 let duration = null;
 let Player=React.createClass({
@@ -18,12 +19,14 @@ let Player=React.createClass({
        progress: 0,
        volume:0,
        isPlay:true,
+       leftTime:''
      }
   },
 
   componentWillReceiveProps(){
     this.setState({
-      progress: Math.round(e.jPlayer.status.currentPercentAbsolute),
+      //progress: Math.round(e.jPlayer.status.currentPercentAbsolute),
+      progress:this.props.progress,
     });
     //console.log(this.props.progress);
  },
@@ -34,7 +37,7 @@ let Player=React.createClass({
        this.setState({
          volume:e.jPlayer.options.volume*100,
          progress:Math.round(e.jPlayer.status.currentPercentAbsolute),
-
+         leftTime:this.formatTime(duration*(1-e.jPlayer.status.currentPercentAbsolute/100))
        });
        //console.log(this.state.volume);
      });
@@ -72,6 +75,22 @@ let Player=React.createClass({
     })
   },
 
+  playPrev(){
+     Pubsub.publish('PLAY_PREV');
+  },
+
+  playNext(){
+    Pubsub.publish('PLAY_NEXT');
+  },
+  formatTime(time){
+    time = Math.floor(time);
+    let miniutes = Math.floor(time/60);
+    let seconds = Math.floor(time%60);
+    seconds= (seconds<10)?`0${seconds}`:seconds;
+    return `${miniutes}:${seconds}`;
+
+  },
+
    render(){
        return (
          <div className={styles.playerall}>
@@ -84,7 +103,7 @@ let Player=React.createClass({
                    <div className={styles.playerartist}>{this.props.currentMusicItem.artist}</div>
                    <div className={styles.playertime}>
                      <Row>
-                       <Col span={4}>-2：00 </Col>
+                       <Col span={4}>-{this.state.leftTime} </Col>
                        <Col span={2}><Icon type="sound" />  </Col>
                        <Col span={4}>
                            <ProgressN progress={this.state.volume} onProgressChange={this.changeVolumeHandler}></ProgressN>
@@ -98,11 +117,11 @@ let Player=React.createClass({
                    <div className={styles.playerbutton}>
                      <Row>
                        <Col span={4}>
-                         <Icon type="left" style={{ fontSize: 28 }}/></Col>
+                         <Icon type="left" style={{ fontSize: 28 }} onClick={this.playPrev}/></Col>
                        <Col span={4}>
                          <Icon type={`${this.state.isPlay?'caret-right':'pause-circle'}`} style={{ fontSize: 28 }}  onClick={this.play}/></Col>
                        <Col span={4}>
-                         <Icon type="right" style={{ fontSize: 28}}/></Col>
+                         <Icon type="right" style={{ fontSize: 28}} onClick={this.playNext}/></Col>
                        <Col span={8} offset={3}>
                          <Icon type="retweet"  style={{ fontSize: 30}}/></Col>
                      </Row>

@@ -6,10 +6,12 @@
 
 
 import React from 'react';
-import {  Switch, Route, Redirect, routerRedux,Router } from 'dva/router';
+import {  Switch, Route, Redirect, routerRedux,Router,IndexRoute } from 'dva/router';
 import IndexPage from './routes/IndexPage';
-import PageList from './routes/pagelist';
+//import PageList from './routes/pagelist';
 import Header from './components/header';
+import Player from './components/page/player';
+import MusicList from './components/page/musiclist';
 
 function RouterConfig({ history }) {
 
@@ -19,16 +21,19 @@ function RouterConfig({ history }) {
   return (
 
      <Router history={history}>
-       <div>
-         <Header></Header>
-                  <Switch>
-                   <Route path="/" exact component={IndexPage} ></Route>
 
-                   <Route path="/list" exact component={PageList}></Route>
+
+                  <Switch>
+                   <Route path="/" exact component={IndexPage} >
+                        <IndexRoute component={Player}></IndexRoute>
+                        <Route path="/" exact component={MusicList} ></Route>
+                   </Route>
+                  {/*
+                   <Route path="/list" exact component={PageList}></Route>*/}
 
 
                  </Switch>
-        </div>
+
      </Router>
 
 
